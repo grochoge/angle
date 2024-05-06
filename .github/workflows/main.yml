@@ -1,0 +1,19 @@
+name: Build ANGLE
+on: [push]
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: setup-depot-tools
+        uses: newkdev/setup-depot-tools@v1.0.1
+      - run: fetch angle
+      - run: gn gen out/Debug
+      - run: autoninja -C out/Debug
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ANGLE
+          path: out
+          if-no-files-found: error
