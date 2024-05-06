@@ -1,5 +1,7 @@
 name: Build ANGLE
 on: [push]
+env:
+  DEPOT_TOOLS_WIN_TOOLCHAIN: 0
 jobs:
   build:
     runs-on: windows-latest
